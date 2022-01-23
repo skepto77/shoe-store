@@ -3,7 +3,7 @@ import ProductList from '../components/ProductList';
 const ProductListPage = () => {
   return (
     <>
-      <section className='top-sales'>
+      <section className='catalog'>
         <h2 className='text-center'>Каталог</h2>
         <ProductList />
       </section>

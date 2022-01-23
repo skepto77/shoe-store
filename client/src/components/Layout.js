@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Banner from './Banner';
+import CartMini from './CartMini';
 // import { Container } from 'react-bootstrap';
 
 const Layout = () => {
@@ -43,10 +44,9 @@ const Layout = () => {
                       data-id='search-expander'
                       className='header-controls-pic header-controls-search'
                     ></div>
-                    <div className='header-controls-pic header-controls-cart'>
-                      <div className='header-controls-cart-full'>1</div>
-                      <div className='header-controls-cart-menu'></div>
-                    </div>
+                    <Link to='/cart'>
+                      <CartMini />
+                    </Link>
                   </div>
                   {/* <form data-id="search-form" className="header-controls-search-form form-inline invisible">
                   <input className="form-control" placeholder="Поиск">

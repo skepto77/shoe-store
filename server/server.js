@@ -5,8 +5,8 @@ const Router = require('koa-router');
 const cors = require('koa2-cors');
 const koaBody = require('koa-body');
 
-const categories = JSON.parse(fs.readFileSync('.server/data/categories.json'));
-const items = JSON.parse(fs.readFileSync('./data/products.json'));
+const categories = JSON.parse(fs.readFileSync('./server/data/categories.json'));
+const items = JSON.parse(fs.readFileSync('./server/data/products.json'));
 const topSaleIds = [66, 65, 73];
 const moreCount = 6;
 
@@ -25,7 +25,8 @@ const randomNumber = (start, stop) => {
 const fortune = (ctx, body = null, status = 200) => {
   // Uncomment for delay
   // const delay = randomNumber(1, 10) * 1000;
-  const delay = 0;
+  // const delay = 0;
+  const delay = 1500;
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       // Uncomment for error generation
