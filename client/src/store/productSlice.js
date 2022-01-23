@@ -28,7 +28,7 @@ export const fetchProducts = createAsyncThunk(
 
       const data = await response.json();
 
-      data.length === 0
+      data.length < 6
         ? dispatch(changeStatusButton('invisible'))
         : dispatch(changeStatusButton('idle'));
 
