@@ -12,9 +12,9 @@ const Layout = () => {
         <div className='row'>
           <div className='col'>
             <nav className='navbar navbar-expand-sm navbar-light bg-light'>
-              <a className='navbar-brand' href='/'>
+              <Link className='navbar-brand' to='/'>
                 <img src={require('../assets/img/header-logo.png')} alt='Bosa Noga' />
-              </a>
+              </Link>
               <div className='collapase navbar-collapse' id='navbarMain'>
                 <ul className='navbar-nav mr-auto'>
                   <li className='nav-item'>
@@ -32,7 +32,7 @@ const Layout = () => {
                       О магазине
                     </Link>
                   </li>
-                  <li className='nav-item active'>
+                  <li className='nav-item'>
                     <Link className='nav-link' to='/contacts'>
                       Контакты
                     </Link>

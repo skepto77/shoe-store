@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchProductsTop } from '../store/productSlice';
 import ProductListItem from './ProductListItem';
 import Loader from './Loader';
+import Message from './Message';
 
 const ProductListTop = () => {
   const dispatch = useDispatch();
@@ -13,8 +14,8 @@ const ProductListTop = () => {
   }, []);
   return (
     <>
+      {error && <Message isError={true}>{error}</Message>}
       <div className='row'>
-        {error && console.log(error)}
         {statusProductListTop === 'loading' && <Loader />}
         {productsTop && productsTop.map((item) => <ProductListItem key={item.id} {...item} />)}
       </div>

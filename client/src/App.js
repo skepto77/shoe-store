@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
@@ -18,7 +18,6 @@ function App() {
         <Route index element={<HomePage />} />
         <Route path='catalog' element={<CatalogPage />} />
         <Route path='catalog/:id' element={<ProductPage />} />
-        {/* <Route path='/' element={<Navigate replace to='services' />} /> */}
         <Route path='about' element={<AboutPage />} />
         <Route path='contacts' element={<ContactsPage />} />
         <Route path='cart' element={<CartPage />} />
