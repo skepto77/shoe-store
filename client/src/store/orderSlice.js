@@ -2,21 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchCreateOrder = createAsyncThunk(
   'order/fetchCreateOrder',
-  async function (args, { rejectWithValue, dispatch, getState }) {
-    const order = {
-      owner: {
-        phone: '+7xxxxxxxxxxx',
-        address: 'Moscow City',
-      },
-      items: [
-        {
-          id: 1,
-          price: 34000,
-          count: 1,
-        },
-      ],
-    };
-
+  async function (order, { rejectWithValue, dispatch, getState }) {
+    console.log(order);
     try {
       const response = await fetch(`http://localhost:7070/api/order`, {
         method: 'POST',
@@ -25,12 +12,14 @@ export const fetchCreateOrder = createAsyncThunk(
         },
         body: JSON.stringify(order),
       });
+      console.log(order);
 
       if (!response.ok) {
-        throw new Error('Произошла ошибка при создании заказа');
+        throw new Error('Произошла ошибка при создании заказа 1');
       }
+      return order;
     } catch (error) {
-      return rejectWithValue('Произошла ошибка при создании заказа');
+      return rejectWithValue('Произошла ошибка при создании заказа 2');
     }
   }
 );
@@ -52,6 +41,7 @@ const orderSlice = createSlice({
     cart: [],
     status: 'idle', // idle, rejected, loading
     error: null,
+    message: '',
   },
   reducers: {
     getCart(state, action) {
@@ -69,8 +59,8 @@ const orderSlice = createSlice({
         cart.push(action.payload);
         state.cart.push(action.payload);
       } else {
-        cart[idx].quantity += action.payload.quantity;
-        state.cart[idx].quantity += action.payload.quantity;
+        cart[idx].count += action.payload.count;
+        state.cart[idx].count += action.payload.count;
       }
       localStorage.setItem(`cart`, JSON.stringify(cart));
     },
@@ -86,7 +76,12 @@ const orderSlice = createSlice({
   extraReducers: {
     [fetchCreateOrder.pending]: setLoading,
 
-    [fetchCreateOrder.fulfilled]: (state, action) => {},
+    [fetchCreateOrder.fulfilled]: (state, action) => {
+      state.message = `Заказ создан. Подробнее:${JSON.stringify(action.payload)}`;
+      state.status = 'idle';
+      localStorage.removeItem('cart');
+      state.cart = [];
+    },
 
     [fetchCreateOrder.rejected]: setError,
   },

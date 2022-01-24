@@ -32,7 +32,7 @@ const Product = () => {
   const [size, setSize] = useState(null);
 
   const addToBasket = () => {
-    dispatch(addToCart({ id, title, size, quantity, price }));
+    dispatch(addToCart({ id: +id, title, size, count: +quantity, price: +price }));
   };
 
   return (

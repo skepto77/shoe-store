@@ -26,6 +26,10 @@ export const fetchProducts = createAsyncThunk(
         dispatch(setFilter(''));
       }
 
+      // if (q === null) {
+      //   dispatch(setFilter(''));
+      // }
+
       if (newCategory !== activeCategory) {
         dispatch(changeCategory(newCategory));
       }
