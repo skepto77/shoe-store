@@ -8,7 +8,15 @@ const ProductListItem = (product) => {
     <>
       <div className='col-4'>
         <div className='card catalog-item-card'>
-          {images && <img src={images[0]} className='card-img-top img-fluid' alt={title} />}
+          <Link to={`/catalog/${id}`}>
+            <span
+              className='product-image card-img-top img-fluid'
+              style={{ backgroundImage: `url(${images[0]})` }}
+              data-original={{ backgroundImage: `url(${images[0]})` }}
+            >
+              <span style={{ backgroundImage: `url(${images[0]})` }}></span>
+            </span>
+          </Link>
           <div className='card-body'>
             <p className='card-text'>{title}</p>
             <p className='card-text'>{price} руб.</p>
