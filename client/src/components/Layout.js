@@ -2,8 +2,8 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Banner from './Banner';
-import CartMini from './CartMini';
-// import { Container } from 'react-bootstrap';
+// import CartMini from './CartMini';
+import SearchMini from './SearchMini';
 
 const Layout = () => {
   return (
@@ -39,18 +39,7 @@ const Layout = () => {
                   </li>
                 </ul>
                 <div>
-                  <div className='header-controls-pics'>
-                    <div
-                      data-id='search-expander'
-                      className='header-controls-pic header-controls-search'
-                    ></div>
-                    <Link to='/cart'>
-                      <CartMini />
-                    </Link>
-                  </div>
-                  {/* <form data-id="search-form" className="header-controls-search-form form-inline invisible">
-                  <input className="form-control" placeholder="Поиск">
-                </form> */}
+                  <SearchMini />
                 </div>
               </div>
             </nav>

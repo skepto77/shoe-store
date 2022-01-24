@@ -5,8 +5,10 @@ export const fetchProducts = createAsyncThunk(
   async function (args, { rejectWithValue, dispatch, getState }) {
     const params = new URLSearchParams();
 
+    const { filter, activeCategory } = getState().products;
+    console.log(args);
     if (args) {
-      const { newCategory, offset } = args;
+      const { newCategory, offset, q } = args;
 
       newCategory && newCategory
         ? params.append('categoryId', newCategory)
@@ -14,7 +16,17 @@ export const fetchProducts = createAsyncThunk(
 
       offset && offset !== 0 ? params.append('offset', offset) : params.delete('offset');
 
-      if (newCategory !== getState().products.activeCategory) {
+      if (q && q !== '') {
+        params.append('q', q);
+        dispatch(setFilter(q));
+      } else if (filter !== '') {
+        params.append('q', filter);
+      } else {
+        params.delete('q');
+        dispatch(setFilter(''));
+      }
+
+      if (newCategory !== activeCategory) {
         dispatch(changeCategory(newCategory));
       }
     }
@@ -127,17 +139,16 @@ const productSlice = createSlice({
       state.activeCategory = action.payload;
     },
 
+    setFilter(state, action) {
+      state.filter = action.payload;
+    },
+
     // changeStatusProductList(state, action) {
     //   state.statusProductList = action.payload;
     // },
     changeStatusButton(state, action) {
       state.statusButton = action.payload;
     },
-
-    // filterItems(state, action) {
-    // console.log(action.payload);
-    //   state.filter = action.payload;
-    // },
   },
   extraReducers: {
     [fetchProducts.pending]: (state) => {
@@ -201,7 +212,7 @@ const productSlice = createSlice({
 
 export const {
   addProducts,
-  filterItems,
+  setFilter,
   changeCategory,
   changeStatusProductList,
   changeStatusButton,

@@ -18,9 +18,6 @@ const ProductList = () => {
     dispatch(fetchCategories());
   }, []);
 
-  // const productsListFiltred =
-  //   filter === '' ? products : products.filter((product) => product.title.includes(filter));
-
   const [newCategory, setNewCategory] = useState(null);
   const [offset, setOffset] = useState(0);
 
