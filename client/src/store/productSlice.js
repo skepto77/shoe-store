@@ -5,8 +5,8 @@ export const fetchProducts = createAsyncThunk(
   async function (args, { rejectWithValue, dispatch, getState }) {
     const params = new URLSearchParams();
 
-    const { filter, activeCategory } = getState().products;
-    console.log(args);
+    const { activeCategory } = getState().products;
+
     if (args) {
       const { newCategory, offset, q } = args;
 
@@ -141,9 +141,6 @@ const productSlice = createSlice({
       state.filter = action.payload;
     },
 
-    // changeStatusProductList(state, action) {
-    //   state.statusProductList = action.payload;
-    // },
     changeStatusButton(state, action) {
       state.statusButton = action.payload;
     },
@@ -165,26 +162,15 @@ const productSlice = createSlice({
       state.statusProductListTop = 'loading';
     },
 
-    [fetchCategories.pending]: (state) => {
-      // state.error = null;
-    },
+    [fetchCategories.pending]: (state) => {},
 
     [fetchProducts.fulfilled]: (state, action) => {
-      // state.products = [...state.products, ...action.payload];
-      // state.products = [...new Set(state.products)];
-      // if (action.payload.length < 6) {
-      //   state.statusButton = 'invisible';
-      // } else {
-      //   state.statusButton = 'idle';
-      // }
-
       if (state.statusButton !== 'invisible') {
         state.statusButton = 'idle';
       }
 
       state.products = action.payload;
       state.statusProductList = 'idle';
-      console.log(action.payload.length);
     },
 
     [fetchProduct.fulfilled]: (state, action) => {
