@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { fetchProduct } from '../store/productSlice';
 import { addToCart } from '../store/orderSlice';
+import Message from './Message';
 import Loader from './Loader';
 
 const Product = () => {
@@ -37,7 +38,7 @@ const Product = () => {
 
   return (
     <>
-      {error && console.log(error)}
+      {error && <Message isError={true}>{error}</Message>}
       {status === 'loading' ? (
         <Loader />
       ) : (
@@ -81,7 +82,6 @@ const Product = () => {
                     </tr>
                   </tbody>
                 </table>
-                {/* TODO fix если все размеры недоступны */}
                 {sizes && (
                   <>
                     <div className='text-center'>
@@ -106,7 +106,7 @@ const Product = () => {
                       </p>
 
                       <p>
-                        {price} Количество:{' '}
+                        Количество:{' '}
                         <span className='btn-group btn-group-sm pl-2'>
                           <button
                             className={cn('btn btn-secondary', { disabled: quantity === 1 })}

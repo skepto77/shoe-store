@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { Link } from 'react-router-dom';
 
 const ProductListItem = (product) => {
-  const { id, title, images, price, error, category } = product;
+  const { id, title, images, price, category } = product;
   return (
     <>
       <div className='col-4'>
@@ -20,7 +20,6 @@ const ProductListItem = (product) => {
           <div className='card-body'>
             <p className='card-text'>{title}</p>
             <p className='card-text'>{price} руб.</p>
-            <p className='card-text'>{category} категория для теста</p>
             <Link to={`/catalog/${id}`} className='btn btn-outline-primary'>
               Заказать
             </Link>

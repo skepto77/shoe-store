@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import { useLocation, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 import { fetchProducts, fetchCategories } from '../store/productSlice';
 import ProductListItem from './ProductListItem';
@@ -22,16 +21,11 @@ const ProductList = () => {
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-    if (offset !== 0) {
-      dispatch(fetchProducts({ newCategory, offset }));
-    }
-  }, [offset]);
-
-  useEffect(() => {
     if (newCategory !== activeCategory) {
-      dispatch(fetchProducts({ newCategory }));
+      setOffset(0);
     }
-  }, [newCategory]);
+    dispatch(fetchProducts({ newCategory, offset, q: filter }));
+  }, [offset, filter, newCategory]);
 
   return (
     <>
