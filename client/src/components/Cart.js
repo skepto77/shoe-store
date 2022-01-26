@@ -9,7 +9,7 @@ import * as yup from 'yup';
 
 const schema = yup
   .object({
-    phone: yup.string().required('Это поле обязательно для заполнения, 10 цифр'),
+    phone: yup.string().length(10, 'Это поле обязательно для заполнения, 10 символов').required(),
     address: yup.string().required('Это поле обязательно для заполнения'),
     agreement: yup.bool().oneOf([true], 'Необходимио согласиться с правилами доставки'),
   })

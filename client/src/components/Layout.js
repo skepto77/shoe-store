@@ -2,7 +2,6 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Banner from './Banner';
-// import CartMini from './CartMini';
 import SearchMini from './SearchMini';
 
 const Layout = () => {

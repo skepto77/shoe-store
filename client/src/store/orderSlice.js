@@ -12,7 +12,6 @@ export const fetchCreateOrder = createAsyncThunk(
         },
         body: JSON.stringify(order),
       });
-      console.log(order);
 
       if (!response.ok) {
         throw new Error('Произошла ошибка при создании заказа 1');
