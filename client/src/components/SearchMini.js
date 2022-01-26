@@ -21,28 +21,16 @@ const SearchMini = () => {
   const handlerClick = (e) => {
     setIsActiveForm(true);
     searchInputRef.current.focus();
-    // searchInputRef.current.style.border = '1px solid black';
-
-    console.log('keyword:', keyword.length, 'isActiveForm:', isActiveForm);
 
     if (isActiveForm && keyword !== '') {
       handlerSubmit(e);
-      return;
-    }
-
-    if (isActiveForm && keyword === '') {
+    } else if (isActiveForm && keyword === '') {
       setIsActiveForm(false);
     }
-
-    // isActiveForm && keyword.length === 0 ? setIsActiveForm(false) : handlerSubmit(e);
-    // if (isActiveForm && keyword === '') {
-    //   setTimeout(() => setIsActiveForm(false), 5000);
-    // }
   };
 
   const handlerChange = (value) => {
     setKeyword(value);
-    console.log('handlerChange', keyword);
   };
 
   const handlerSubmit = (e) => {
