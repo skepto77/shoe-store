@@ -1,9 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
 import { Link, useNavigate } from 'react-router-dom';
 import { fetchProducts } from '../store/productSlice';
-
 import CartMini from './CartMini';
 
 const SearchMini = () => {
@@ -20,10 +19,30 @@ const SearchMini = () => {
   });
 
   const handlerClick = (e) => {
-    e.preventDefault();
-    setIsActiveForm((isActiveForm) => !isActiveForm);
+    setIsActiveForm(true);
     searchInputRef.current.focus();
     // searchInputRef.current.style.border = '1px solid black';
+
+    console.log('keyword:', keyword.length, 'isActiveForm:', isActiveForm);
+
+    if (isActiveForm && keyword !== '') {
+      handlerSubmit(e);
+      return;
+    }
+
+    if (isActiveForm && keyword === '') {
+      setIsActiveForm(false);
+    }
+
+    // isActiveForm && keyword.length === 0 ? setIsActiveForm(false) : handlerSubmit(e);
+    // if (isActiveForm && keyword === '') {
+    //   setTimeout(() => setIsActiveForm(false), 5000);
+    // }
+  };
+
+  const handlerChange = (value) => {
+    setKeyword(value);
+    console.log('handlerChange', keyword);
   };
 
   const handlerSubmit = (e) => {
@@ -51,7 +70,8 @@ const SearchMini = () => {
           className='form-control'
           placeholder='Поиск'
           value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
+          onFocus={(e) => e.persist()}
+          onChange={(e) => handlerChange(e.target.value)}
           ref={searchInputRef}
         />
       </form>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchProducts } from '../store/productSlice';
+import { fetchProducts, setFilter } from '../store/productSlice';
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -9,10 +9,17 @@ const Search = () => {
 
   const handlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(fetchProducts({ q: keyword }));
     if (keyword === '') {
-      fetchProducts({ q: null });
+      dispatch(setFilter(keyword));
     }
+    dispatch(setFilter(keyword));
+    console.log('setFilter(keyword) Search keyword:', keyword);
+    // console.log('keyword:', keyword);
+    // dispatch(fetchProducts({ q: keyword }));
+    // if (keyword === '') {
+    //   console.log('keyword === ', keyword);
+    //   fetchProducts({ q: '' });
+    // }
   };
 
   return (

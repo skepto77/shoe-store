@@ -17,18 +17,12 @@ export const fetchProducts = createAsyncThunk(
       offset && offset !== 0 ? params.append('offset', offset) : params.delete('offset');
 
       if (q && q !== '') {
-        params.append('q', q);
         dispatch(setFilter(q));
-      } else if (filter !== '') {
-        params.append('q', filter);
+        params.append('q', q);
       } else {
         params.delete('q');
         dispatch(setFilter(''));
       }
-
-      // if (q === null) {
-      //   dispatch(setFilter(''));
-      // }
 
       if (newCategory !== activeCategory) {
         dispatch(changeCategory(newCategory));
