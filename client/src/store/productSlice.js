@@ -44,7 +44,7 @@ export const fetchProducts = createAsyncThunk(
 
       return args && args.offset ? [...getState().products.products, ...data] : data;
     } catch (error) {
-      console.log('Произошла ошибка при загрузке списка');
+      error.message = `${error.message}. Произошла ошибка при загрузке списка товаров.`;
       return rejectWithValue(error.message);
     }
   }
@@ -62,7 +62,7 @@ export const fetchProductsTop = createAsyncThunk(
       const data = await response.json();
       return data;
     } catch (error) {
-      console.log('Произошла ошибка при загрузке списка top-sales');
+      error.message = `${error.message}. Произошла ошибка при загрузке списка top-sales`;
       return rejectWithValue(error.message);
     }
   }
@@ -81,7 +81,8 @@ export const fetchProduct = createAsyncThunk(
       const data = await response.json();
       return data;
     } catch (error) {
-      return rejectWithValue('Ошибка при загрузке продукта. Обновите страницу');
+      error.message = `${error.message}. Ошибка при загрузке продукта. Обновите страницу`;
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -98,16 +99,20 @@ export const fetchCategories = createAsyncThunk(
       const data = await response.json();
       return data;
     } catch (error) {
-      return rejectWithValue('Произошла ошибка при загрузке списка категорий');
+      error.message = `${error.message}. Произошла ошибка при загрузке списка категорий`;
+      return rejectWithValue(error.message);
     }
   }
 );
 
 const setError = (state, action) => {
-  console.log(action.error.message);
+  // console.log(action.error.message);
+  // console.log(action.error);
+  // console.log(action.payload);
   state.status = 'rejected';
-  state.error = action.error.message;
+  state.error = action.error.message + ': ' + action.payload;
   state.statusButton = 'idle';
+  state.statusProductListTop = 'idle';
   state.statusProductList = 'idle';
 };
 
